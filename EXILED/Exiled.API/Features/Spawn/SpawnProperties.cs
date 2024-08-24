@@ -35,6 +35,11 @@ namespace Exiled.API.Features.Spawn
         public List<RoleSpawnPoint> RoleSpawnPoints { get; set; } = new();
 
         /// <summary>
+        /// Gets or sets a <see cref="List{T}"/> of possible room-based spawn points.
+        /// </summary>
+        public List<RoomSpawnPoint> RoomSpawnPoints { get; set; } = new();
+
+        /// <summary>
         /// Counts how many spawn points are in this instance.
         /// </summary>
         /// <returns>How many spawn points there are.</returns>
