@@ -48,9 +48,7 @@ namespace Exiled.API.Features.Spawn
             {
                 Room roomInstance = Features.Room.Get(Room) ?? throw new InvalidOperationException("The room instance could not be found.");
 
-                return Offset.HasValue
-                    ? (roomInstance.Type == RoomType.Surface ? Offset.Value : roomInstance.transform.TransformPoint(Offset.Value))
-                    : roomInstance.Position;
+                return Offset.HasValue ? roomInstance.transform.TransformPoint(Offset.Value) : roomInstance.Position;
             }
             set => throw new InvalidOperationException("The position of this type of SpawnPoint cannot be changed.");
         }
