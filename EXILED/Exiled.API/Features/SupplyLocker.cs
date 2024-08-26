@@ -9,6 +9,7 @@ namespace Exiled.API.Features
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using Exiled.API.Enums;
     using Exiled.API.Extensions;
@@ -195,5 +196,24 @@ namespace Exiled.API.Features
         /// </summary>
         /// <param name="type">The type of item to be added.</param>
         public void AddItem(ItemType type) => AddItem(ItemPickup.Create(type, default, default));
+
+        /// <summary>
+        /// Clears the cached lockers in the <see cref="LockerToSupplyLocker"/> dictionary that have become invalid.
+        /// This method identifies and removes all entries where either the key (a <see cref="Locker"/> instance)
+        /// or the value (a <see cref="SupplyLocker"/> instance) is null, ensuring that only valid references
+        /// are kept in the cache.
+        /// </summary>
+        internal static void ClearCache()
+        {
+            List<Locker> keysToRemove = LockerToSupplyLocker
+                .Where(kv => kv.Key == null || kv.Value == null)
+                .Select(kv => kv.Key)
+                .ToList();
+
+            foreach (Locker key in keysToRemove)
+            {
+                LockerToSupplyLocker.Remove(key);
+            }
+        }
     }
 }

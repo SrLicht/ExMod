@@ -27,7 +27,7 @@ namespace Exiled.API.Features.Spawn
         /// <summary>
         /// Gets or sets the offset position within the room where the spawn point is located, relative to the room's origin.
         /// </summary>
-        public Vector3? Offset { get; set; }
+        public Vector3 Offset { get; set; } = Vector3.zero;
 
         /// <inheritdoc/>
         public override float Chance { get; set; }
@@ -48,7 +48,7 @@ namespace Exiled.API.Features.Spawn
             {
                 Room roomInstance = Features.Room.Get(Room) ?? throw new InvalidOperationException("The room instance could not be found.");
 
-                return Offset.HasValue ? roomInstance.transform.TransformPoint(Offset.Value) : roomInstance.Position;
+                return Offset != Vector3.zero ? roomInstance.transform.TransformPoint(Offset) : roomInstance.Position;
             }
             set => throw new InvalidOperationException("The position of this type of SpawnPoint cannot be changed.");
         }

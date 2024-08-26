@@ -43,11 +43,6 @@ namespace Exiled.API.Features
     public static class Map
     {
         /// <summary>
-        /// A list of <see cref="Locker"/>s on the map.
-        /// </summary>
-        internal static readonly List<Locker> LockersValue = new(35);
-
-        /// <summary>
         /// A list of <see cref="PocketDimensionTeleport"/>s on the map.
         /// </summary>
         internal static readonly List<PocketDimensionTeleport> TeleportsValue = new(8);
@@ -86,7 +81,7 @@ namespace Exiled.API.Features
         /// <summary>
         /// Gets all <see cref="Locker"/> objects.
         /// </summary>
-        public static ReadOnlyCollection<Locker> Lockers { get; } = LockersValue.AsReadOnly();
+        public static ReadOnlyCollection<Locker> Lockers { get; } = SupplyLocker.LockerToSupplyLocker.Keys.ToList().AsReadOnly();
 
         /// <summary>
         /// Gets all <see cref="AdminToy"/> objects.
@@ -388,8 +383,6 @@ namespace Exiled.API.Features
         internal static void ClearCache()
         {
             Item.BaseToItem.Clear();
-
-            LockersValue.RemoveAll(locker => locker == null);
 
             Ragdoll.BasicRagdollToRagdoll.Clear();
 

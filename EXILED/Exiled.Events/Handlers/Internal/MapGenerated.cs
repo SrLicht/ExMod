@@ -47,6 +47,7 @@ namespace Exiled.Events.Handlers.Internal
         {
             Map.ClearCache();
             PrefabHelper.LoadPrefabs();
+            SupplyLocker.ClearCache();
 
             // TODO: Fix For (https://git.scpslgame.com/northwood-qa/scpsl-bug-reporting/-/issues/377)
             PlayerRoles.RoleAssign.HumanSpawner.Handlers[PlayerRoles.Team.ChaosInsurgency] = new PlayerRoles.RoleAssign.OneRoleHumanSpawner(PlayerRoles.RoleTypeId.ChaosConscript);

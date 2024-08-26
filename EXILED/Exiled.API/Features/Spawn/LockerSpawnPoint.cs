@@ -32,7 +32,7 @@ namespace Exiled.API.Features.Spawn
         /// <summary>
         /// Gets or sets the offset position within the locker where the spawn point is located, relative to the locker's origin.
         /// </summary>
-        public Vector3? Offset { get; set; }
+        public Vector3 Offset { get; set; } = Vector3.zero;
 
         /// <inheritdoc/>
         public override float Chance { get; set; }
@@ -58,7 +58,7 @@ namespace Exiled.API.Features.Spawn
                     return foundLocker.RandomChamberPosition;
 
                 // Otherwise, use the Offset if provided, or the locker's position.
-                return Offset.HasValue ? foundLocker.Transform.TransformPoint(Offset.Value) : foundLocker.Position;
+                return Offset != Vector3.zero ? foundLocker.Transform.TransformPoint(Offset) : foundLocker.Position;
             }
             set => throw new InvalidOperationException("The position of this type of SpawnPoint cannot be changed.");
         }
