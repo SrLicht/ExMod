@@ -694,8 +694,8 @@ namespace Exiled.CustomItems.API.Features
             if (SpawnProperties is null)
                 return;
 
-            // This will go over each spawn property type (static, dynamic, role-based, and room-based) to try and spawn the item.
-            // It will attempt to spawn in role-based locations, then dynamic ones, followed by room-based, and finally static.
+            // This will go over each spawn property type (static, dynamic, role-based, room-based, and locker-based) to try and spawn the item.
+            // It will attempt to spawn in role-based locations, then dynamic ones, followed by room-based, locker-based, and finally static.
             // Math.Min is used here to ensure that our recursive Spawn() calls do not result in exceeding the spawn limit config.
             // This is the same as:
             // int spawned = 0;
@@ -705,8 +705,10 @@ namespace Exiled.CustomItems.API.Features
             // if (spawned < SpawnProperties.Limit)
             //    spawned += Spawn(SpawnProperties.RoomSpawnPoints, SpawnProperties.Limit - spawned);
             // if (spawned < SpawnProperties.Limit)
+            //    spawned += Spawn(SpawnProperties.LockerSpawnPoints, SpawnProperties.Limit - spawned);
+            // if (spawned < SpawnProperties.Limit)
             //    Spawn(SpawnProperties.StaticSpawnPoints, SpawnProperties.Limit - spawned);
-            Spawn(SpawnProperties.StaticSpawnPoints, Math.Min(SpawnProperties.Limit, SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.DynamicSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoleSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Spawn(SpawnProperties.RoomSpawnPoints, SpawnProperties.Limit)))));
+            Spawn(SpawnProperties.StaticSpawnPoints, Math.Min(SpawnProperties.Limit, SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.DynamicSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoleSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoomSpawnPoints, SpawnProperties.Limit),SpawnProperties.Limit - Spawn(SpawnProperties.LockerSpawnPoints, SpawnProperties.Limit))))));
         }
 
         /// <summary>
