@@ -86,6 +86,27 @@ namespace Exiled.API.Features
         public IEnumerable<LockerChamber> OpenedChambers => Chambers.Where(c => c.IsOpen).ToArray();
 
         /// <summary>
+        /// Gets a random position from one of the <see cref="Chambers"/>.
+        /// </summary>
+        public Vector3 RandomChamberPosition
+        {
+            get
+            {
+                LockerChamber randomChamber = Chambers.GetRandomValue();
+
+                // Determine if the chamber uses multiple spawn points and has at least one available spawn point.
+                if (randomChamber._useMultipleSpawnpoints && randomChamber._spawnpoints.Length > 0)
+                {
+                    // Return the position of a random spawn point within the chamber.
+                    return randomChamber._spawnpoints.RandomItem().position;
+                }
+
+                // Return the position of the main spawn point for the chamber.
+                return randomChamber._spawnpoint.position;
+            }
+        }
+
+        /// <summary>
         /// Gets the <see cref="SupplyLocker"/> belonging to the <see cref="Locker"/>, if any.
         /// </summary>
         /// <param name="locker">The <see cref="Locker"/> to get.</param>
