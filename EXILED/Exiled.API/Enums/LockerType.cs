@@ -45,6 +45,6 @@ namespace Exiled.API.Enums
         /// <summary>
         /// Unknow type of locker.
         /// </summary>
-        Unknow
+        Unknow,
     }
 }

@@ -52,7 +52,6 @@ namespace Exiled.API.Features
         /// </summary>
         public Locker Base { get; }
 
-
         /// <summary>
         /// Gets the <see cref="LockerType"/> of the <see cref="SupplyLocker"/>.
         /// </summary>
