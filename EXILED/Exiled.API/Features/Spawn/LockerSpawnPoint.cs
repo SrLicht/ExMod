@@ -23,6 +23,11 @@ namespace Exiled.API.Features.Spawn
         /// </summary>
         public ZoneType Zone { get; set; }
 
+        /// <summary>
+        /// Gets or sets the offset position within the locker where the spawn point is located, relative to the locker's origin.
+        /// </summary>
+        public Vector3? Offset { get; set; }
+
         /// <inheritdoc/>
         public override float Chance { get; set; }
 
@@ -40,8 +45,8 @@ namespace Exiled.API.Features.Spawn
         {
             get
             {
-                SupplyLocker foundLocker = SupplyLocker.Get(Zone).FirstOrDefault();
-                return foundLocker == null ? throw new NullReferenceException("No locker found in the specified zone.") : foundLocker.Position;
+                SupplyLocker foundLocker = SupplyLocker.Random(Zone) ?? throw new NullReferenceException("No locker found in the specified zone.");
+                return Offset.HasValue ? foundLocker.Transform.TransformPoint(Offset.Value) : foundLocker.Position;
             }
             set => throw new InvalidOperationException("The position of this type of SpawnPoint cannot be changed.");
         }
