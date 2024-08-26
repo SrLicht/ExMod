@@ -619,6 +619,7 @@ namespace Exiled.CustomItems.API.Features
 
                 spawned++;
 
+#pragma warning disable CS0618 // Type or member is obsolete \\ TODO: REMOVE THIS
                 if (spawnPoint is DynamicSpawnPoint dynamicSpawnPoint && dynamicSpawnPoint.Location == SpawnLocationType.InsideLocker)
                 {
                     for (int i = 0; i < 50; i++)
@@ -666,10 +667,6 @@ namespace Exiled.CustomItems.API.Features
                         break;
                     }
                 }
-                else if (spawnPoint is RoleSpawnPoint roleSpawnPoint)
-                {
-                    Spawn(roleSpawnPoint.Role.GetRandomSpawnLocation().Position, null);
-                }
                 else
                 {
                     Pickup? pickup = Spawn(spawnPoint.Position, null);
@@ -681,6 +678,7 @@ namespace Exiled.CustomItems.API.Features
 
                     Log.Debug($"Spawned {Name} at {spawnPoint.Position} ({spawnPoint.Name})");
                 }
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             return spawned;
@@ -708,7 +706,7 @@ namespace Exiled.CustomItems.API.Features
             //    spawned += Spawn(SpawnProperties.LockerSpawnPoints, SpawnProperties.Limit - spawned);
             // if (spawned < SpawnProperties.Limit)
             //    Spawn(SpawnProperties.StaticSpawnPoints, SpawnProperties.Limit - spawned);
-            Spawn(SpawnProperties.StaticSpawnPoints, Math.Min(SpawnProperties.Limit, SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.DynamicSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoleSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoomSpawnPoints, SpawnProperties.Limit),SpawnProperties.Limit - Spawn(SpawnProperties.LockerSpawnPoints, SpawnProperties.Limit))))));
+            Spawn(SpawnProperties.StaticSpawnPoints, Math.Min(SpawnProperties.Limit, SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.DynamicSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoleSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Math.Min(Spawn(SpawnProperties.RoomSpawnPoints, SpawnProperties.Limit), SpawnProperties.Limit - Spawn(SpawnProperties.LockerSpawnPoints, SpawnProperties.Limit))))));
         }
 
         /// <summary>
