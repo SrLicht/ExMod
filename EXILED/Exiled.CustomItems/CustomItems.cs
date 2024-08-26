@@ -19,7 +19,7 @@ namespace Exiled.CustomItems
     /// </summary>
     public class CustomItems : Plugin<Config>
     {
-        private RoundHandler? roundHandler;
+        private MapHandler? roundHandler;
         private PlayerHandler? playerHandler;
         private Harmony? harmony;
 
@@ -32,7 +32,7 @@ namespace Exiled.CustomItems
         public override void OnEnabled()
         {
             Instance = this;
-            roundHandler = new RoundHandler();
+            roundHandler = new MapHandler();
             playerHandler = new PlayerHandler();
 
             Exiled.Events.Handlers.Map.Generated += roundHandler.OnMapGenerated;
