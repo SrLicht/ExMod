@@ -39,6 +39,7 @@ namespace Exiled.API.Features
         {
             Base = locker;
             LockerToSupplyLocker.Add(locker, this);
+            Type = locker.GetLockerType();
         }
 
         /// <summary>
@@ -50,6 +51,12 @@ namespace Exiled.API.Features
         /// Gets the <see cref="Locker"/> instance of the supply locker.
         /// </summary>
         public Locker Base { get; }
+
+
+        /// <summary>
+        /// Gets the <see cref="LockerType"/> of the <see cref="SupplyLocker"/>.
+        /// </summary>
+        public LockerType Type { get; }
 
         /// <summary>
         /// Gets the <see cref="SupplyLocker"/> <see cref="UnityEngine.Transform"/>.
@@ -130,11 +137,23 @@ namespace Exiled.API.Features
         public static IEnumerable<SupplyLocker> Get(Func<SupplyLocker, bool> predicate) => List.Where(predicate);
 
         /// <summary>
-        /// Gets a random <see cref="SupplyLocker"/>.
+        /// Gets a random <see cref="SupplyLocker"/> based on the specified filters.
         /// </summary>
-        /// <param name="zoneType">Filters by <see cref="ZoneType"/>.</param>
-        /// <returns><see cref="SupplyLocker"/> object.</returns>
-        public static SupplyLocker Random(ZoneType zoneType = ZoneType.Unspecified) => (zoneType is not ZoneType.Unspecified ? Get(r => r.Zone.HasFlag(zoneType)) : List).GetRandomValue();
+        /// <param name="zone">The <see cref="ZoneType"/> to filter by. If unspecified, all zones are considered.</param>
+        /// <param name="lockerType">The <see cref="LockerType"/> to filter by. If unspecified, all locker types are considered.</param>
+        /// <returns>A random <see cref="SupplyLocker"/> object, or null if no matching locker is found.</returns>
+        public static SupplyLocker? Random(ZoneType zone = ZoneType.Unspecified, LockerType lockerType = LockerType.Unknow)
+        {
+            IEnumerable<SupplyLocker> filteredLockers = List;
+
+            if (lockerType != LockerType.Unknow)
+                filteredLockers = filteredLockers.Where(l => l.Type == lockerType);
+
+            if (zone != ZoneType.Unspecified)
+                filteredLockers = filteredLockers.Where(l => l.Zone == zone);
+
+            return filteredLockers.GetRandomValue();
+        }
 
         /// <summary>
         /// Adds an item to a randomly selected locker chamber.

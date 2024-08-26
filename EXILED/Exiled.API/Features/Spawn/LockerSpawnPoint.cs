@@ -21,7 +21,7 @@ namespace Exiled.API.Features.Spawn
         /// <summary>
         /// Gets or sets the zone where the locker is located.
         /// </summary>
-        public ZoneType Zone { get; set; }
+        public ZoneType Zone { get; set; } = ZoneType.Unspecified;
 
         /// <summary>
         /// Gets or sets a value indicating whether to use a random locker chamber's position for spawning.
@@ -33,6 +33,11 @@ namespace Exiled.API.Features.Spawn
         /// Gets or sets the offset position within the locker where the spawn point is located, relative to the locker's origin.
         /// </summary>
         public Vector3 Offset { get; set; } = Vector3.zero;
+
+        /// <summary>
+        /// Gets or sets the type of the <see cref="SupplyLocker"/>.
+        /// </summary>
+        public LockerType Type { get; set; } = LockerType.Unknow;
 
         /// <inheritdoc/>
         public override float Chance { get; set; }
@@ -51,7 +56,7 @@ namespace Exiled.API.Features.Spawn
         {
             get
             {
-                SupplyLocker foundLocker = SupplyLocker.Random(Zone) ?? throw new NullReferenceException("No locker found in the specified zone.");
+                SupplyLocker foundLocker = SupplyLocker.Random(Zone, Type) ?? throw new NullReferenceException("No locker found in the specified zone.");
 
                 // If UseChamber is true, use a random chamber's position.
                 if (UseChamber)
