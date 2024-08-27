@@ -8,7 +8,7 @@
 namespace Exiled.API.Enums
 {
     /// <summary>
-    /// Unique identifier for different types of <see cref="Features.SupplyLocker"/>s.
+    /// Unique identifier for different types of <see cref="Features.Lockers.Locker"/>s.
     /// </summary>
     public enum LockerType
     {

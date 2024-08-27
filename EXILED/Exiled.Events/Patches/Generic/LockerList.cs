@@ -12,7 +12,7 @@ namespace Exiled.Events.Patches.Generic
 
     using API.Features;
     using API.Features.Pools;
-
+    using Exiled.API.Features.Lockers;
     using HarmonyLib;
 
     using MapGeneration.Distributors;
@@ -20,22 +20,22 @@ namespace Exiled.Events.Patches.Generic
     using static HarmonyLib.AccessTools;
 
     /// <summary>
-    /// Patches <see cref="Locker.Start"/>.
+    /// Patches <see cref="MapGeneration.Distributors.Locker.Start"/>.
     /// </summary>
-    [HarmonyPatch(typeof(Locker), nameof(Locker.Start))]
+    [HarmonyPatch(typeof(MapGeneration.Distributors.Locker), nameof(MapGeneration.Distributors.Locker.Start))]
     internal class LockerList
     {
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> codeInstructions)
         {
             List<CodeInstruction> newInstructions = ListPool<CodeInstruction>.Pool.Get(codeInstructions);
 
-            // new SupplyLocker(this)
+            // new Locker(this)
             newInstructions.InsertRange(
                 0,
                 new CodeInstruction[]
                 {
                     new(OpCodes.Ldarg_0),
-                    new(OpCodes.Newobj, GetDeclaredConstructors(typeof(SupplyLocker))[0]),
+                    new(OpCodes.Newobj, GetDeclaredConstructors(typeof(API.Features.Lockers.Locker))[0]),
                     new(OpCodes.Pop),
                 });
 

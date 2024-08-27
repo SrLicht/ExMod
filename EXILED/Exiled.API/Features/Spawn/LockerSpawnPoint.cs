@@ -10,6 +10,7 @@ namespace Exiled.API.Features.Spawn
     using System.Linq;
 
     using Exiled.API.Enums;
+    using Exiled.API.Features.Lockers;
     using UnityEngine;
     using YamlDotNet.Serialization;
 
@@ -35,7 +36,7 @@ namespace Exiled.API.Features.Spawn
         public Vector3 Offset { get; set; } = Vector3.zero;
 
         /// <summary>
-        /// Gets or sets the type of the <see cref="SupplyLocker"/>.
+        /// Gets or sets the type of the <see cref="Locker"/>.
         /// </summary>
         public LockerType Type { get; set; } = LockerType.Unknow;
 
@@ -56,7 +57,7 @@ namespace Exiled.API.Features.Spawn
         {
             get
             {
-                SupplyLocker foundLocker = SupplyLocker.Random(Zone, Type) ?? throw new NullReferenceException("No locker found in the specified zone.");
+                Locker foundLocker = Locker.Random(Zone, Type) ?? throw new NullReferenceException("No locker found in the specified zone.");
 
                 // If UseChamber is true, use a random chamber's position.
                 if (UseChamber)

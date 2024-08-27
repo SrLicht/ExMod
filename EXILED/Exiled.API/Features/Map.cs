@@ -16,6 +16,7 @@ namespace Exiled.API.Features
     using Enums;
     using Exiled.API.Extensions;
     using Exiled.API.Features.Hazards;
+    using Exiled.API.Features.Lockers;
     using Exiled.API.Features.Pickups;
     using Exiled.API.Features.Toys;
     using global::Hazards;
@@ -79,9 +80,9 @@ namespace Exiled.API.Features
         public static ReadOnlyCollection<PocketDimensionTeleport> PocketDimensionTeleports { get; } = TeleportsValue.AsReadOnly();
 
         /// <summary>
-        /// Gets all <see cref="Locker"/> objects.
+        /// Gets all <see cref="MapGeneration.Distributors.Locker"/> objects.
         /// </summary>
-        public static ReadOnlyCollection<Locker> Lockers { get; } = SupplyLocker.LockerToSupplyLocker.Keys.ToList().AsReadOnly();
+        public static ReadOnlyCollection<MapGeneration.Distributors.Locker> Lockers { get; } = Features.Lockers.Locker.BaseToExiledLockers.Keys.ToList().AsReadOnly();
 
         /// <summary>
         /// Gets all <see cref="AdminToy"/> objects.
@@ -207,10 +208,10 @@ namespace Exiled.API.Features
         }
 
         /// <summary>
-        /// Gets a random <see cref="Locker"/>.
+        /// Gets a random <see cref="MapGeneration.Distributors.Locker"/>.
         /// </summary>
-        /// <returns><see cref="Locker"/> object.</returns>
-        public static Locker GetRandomLocker() => Lockers.GetRandomValue();
+        /// <returns><see cref="MapGeneration.Distributors.Locker"/> object.</returns>
+        public static MapGeneration.Distributors.Locker GetRandomLocker() => Lockers.GetRandomValue();
 
         /// <summary>
         /// Gets a random <see cref="Pickup"/>.
