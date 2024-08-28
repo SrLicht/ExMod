@@ -244,7 +244,6 @@ namespace Exiled.API.Features
         /// </returns>
         public static Lockers.Locker GetRandomLocker(ZoneType zone = ZoneType.Unspecified, LockerType lockerType = LockerType.Unknow) => Features.Lockers.Locker.Random(zone, lockerType);
 
-
         /// <summary>
         /// Gets a random <see cref="Pickup"/>.
         /// </summary>
