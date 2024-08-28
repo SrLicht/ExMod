@@ -661,9 +661,15 @@ namespace Exiled.CustomItems.API.Features
                         }
 
                         Vector3 position = chamber._spawnpoint.transform.position;
-                        Spawn(position, null);
-                        Log.Debug($"Spawned {Name} at {position} ({spawnPoint.Name})");
 
+                        Pickup? pickup = Spawn(position, null);
+                        if (pickup?.Base is BaseFirearmPickup firearmPickup && this is CustomWeapon customWeapon)
+                        {
+                            firearmPickup.Status = new FirearmStatus(customWeapon.ClipSize, firearmPickup.Status.Flags, firearmPickup.Status.Attachments);
+                            firearmPickup.NetworkStatus = firearmPickup.Status;
+                        }
+
+                        Log.Debug($"Spawned {Name} at {position} ({spawnPoint.Name})");
                         break;
                     }
                 }
