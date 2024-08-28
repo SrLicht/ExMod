@@ -143,7 +143,7 @@ namespace Exiled.API.Features.Lockers
         /// </summary>
         /// <param name="zone">The <see cref="ZoneType"/> to filter by. If unspecified, all zones are considered.</param>
         /// <param name="lockerType">The <see cref="LockerType"/> to filter by. If unspecified, all locker types are considered.</param>
-        /// <returns>A random <see cref="Locker"/> object, or null if no matching locker is found.</returns>
+        /// <returns>A random <see cref="Locker"/> object, or  <see langword="null"/> if no matching locker is found.</returns>
         public static Locker? Random(ZoneType zone = ZoneType.Unspecified, LockerType lockerType = LockerType.Unknow)
         {
             IEnumerable<Locker> filteredLockers = List;
@@ -224,6 +224,7 @@ namespace Exiled.API.Features.Lockers
         internal static void ClearCache()
         {
             BaseToExiledLockers.Clear();
+            Chamber.Chambers.Clear();
         }
     }
 }

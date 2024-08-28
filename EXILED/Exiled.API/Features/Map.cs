@@ -82,7 +82,19 @@ namespace Exiled.API.Features
         /// <summary>
         /// Gets all <see cref="MapGeneration.Distributors.Locker"/> objects.
         /// </summary>
+        /// <remarks>
+        /// This method is obsolete. Use <see cref="Map.ExiledLockers"/> instead to retrieve the <see cref="Lockers.Locker"/> objects directly.
+        /// </remarks>
+        [Obsolete("Use Map.ExiledLockers instead")]
         public static ReadOnlyCollection<MapGeneration.Distributors.Locker> Lockers { get; } = Features.Lockers.Locker.BaseToExiledLockers.Keys.ToList().AsReadOnly();
+
+        /// <summary>
+        /// Gets all <see cref="Lockers.Locker"/> objects.
+        /// </summary>
+        /// <remarks>
+        /// This metod will be renamed to Lockers when <see cref="Map.Lockers"/> is discontinued.
+        /// </remarks>
+        public static IReadOnlyCollection<Lockers.Locker> ExiledLockers { get; } = Features.Lockers.Locker.List;
 
         /// <summary>
         /// Gets all <see cref="AdminToy"/> objects.
@@ -210,8 +222,28 @@ namespace Exiled.API.Features
         /// <summary>
         /// Gets a random <see cref="MapGeneration.Distributors.Locker"/>.
         /// </summary>
-        /// <returns><see cref="MapGeneration.Distributors.Locker"/> object.</returns>
-        public static MapGeneration.Distributors.Locker GetRandomLocker() => Lockers.GetRandomValue();
+        /// <remarks>
+        /// This method is obsolete. Use <see cref="GetRandomLocker(ZoneType, LockerType)"/> instead.
+        /// to specify the zone and locker type for more precise filtering.
+        /// </remarks>
+        /// <returns>A <see cref="MapGeneration.Distributors.Locker"/> object from any zone and of any type.</returns>
+        [Obsolete("Use GetRandomLocker(ZoneType, LockerType) instead.")]
+        public static MapGeneration.Distributors.Locker GetRandomLocker() => Features.Lockers.Locker.Random().Base;
+
+        /// <summary>
+        /// Gets a random <see cref="Lockers.Locker"/> from the specified zone and locker type.
+        /// </summary>
+        /// <param name="zone">
+        /// The <see cref="ZoneType"/> to filter the lockers by. If <see cref="ZoneType.Unspecified"/> is provided, lockers from all zones are considered.
+        /// </param>
+        /// <param name="lockerType">
+        /// The <see cref="LockerType"/> to filter the lockers by. If <see cref="LockerType.Unknow"/> is provided, lockers of any type are considered.
+        /// </param>
+        /// <returns>
+        /// A <see cref="Locker"/> object that matches the specified zone and locker type, or  <see langword="null"/> if no matching locker is found.
+        /// </returns>
+        public static Lockers.Locker GetRandomLocker(ZoneType zone = ZoneType.Unspecified, LockerType lockerType = LockerType.Unknow) => Features.Lockers.Locker.Random(zone, lockerType);
+
 
         /// <summary>
         /// Gets a random <see cref="Pickup"/>.
