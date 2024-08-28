@@ -13,7 +13,7 @@ namespace Exiled.API.Enums
     public enum LockerType
     {
         /// <summary>
-        /// The pedestal used by SCPs.
+        /// The pedestal used by SCP items.
         /// </summary>
         Pedestal,
 
