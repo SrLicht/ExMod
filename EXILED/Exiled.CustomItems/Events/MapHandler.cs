@@ -9,7 +9,7 @@ namespace Exiled.CustomItems.Events
 {
     using Exiled.CustomItems.API.Features;
     using MEC;
-  
+
     /// <summary>
     /// Event Handlers for the CustomItem API.
     /// </summary>
@@ -23,5 +23,6 @@ namespace Exiled.CustomItems.Events
                 foreach (CustomItem customItem in CustomItem.Registered)
                     customItem?.SpawnAll();
             });
+        }
     }
 }
