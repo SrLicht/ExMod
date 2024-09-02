@@ -19,7 +19,11 @@ namespace Exiled.CustomItems
     /// </summary>
     public class CustomItems : Plugin<Config>
     {
+<<<<<<< HEAD
         private RoundHandler? roundHandler;
+=======
+        private MapHandler? roundHandler;
+>>>>>>> 96ccf323 (``[Exiled::CustomItems]`` ``[Exiled::API]`` ``[Exiled::CustomRoles]`` Adding news Spawnpoints, Wrapper for Locker and added LockerType (#77))
         private PlayerHandler? playerHandler;
         private Harmony? harmony;
 
@@ -32,10 +36,17 @@ namespace Exiled.CustomItems
         public override void OnEnabled()
         {
             Instance = this;
+<<<<<<< HEAD
             roundHandler = new RoundHandler();
             playerHandler = new PlayerHandler();
 
             Exiled.Events.Handlers.Server.RoundStarted += roundHandler.OnRoundStarted;
+=======
+            roundHandler = new MapHandler();
+            playerHandler = new PlayerHandler();
+
+            Exiled.Events.Handlers.Map.Generated += roundHandler.OnMapGenerated;
+>>>>>>> 96ccf323 (``[Exiled::CustomItems]`` ``[Exiled::API]`` ``[Exiled::CustomRoles]`` Adding news Spawnpoints, Wrapper for Locker and added LockerType (#77))
 
             Exiled.Events.Handlers.Player.ChangingItem += playerHandler.OnChangingItem;
 
@@ -50,7 +61,11 @@ namespace Exiled.CustomItems
         /// <inheritdoc />
         public override void OnDisabled()
         {
+<<<<<<< HEAD
             Exiled.Events.Handlers.Server.RoundStarted -= roundHandler!.OnRoundStarted;
+=======
+            Exiled.Events.Handlers.Map.Generated -= roundHandler!.OnMapGenerated;
+>>>>>>> 96ccf323 (``[Exiled::CustomItems]`` ``[Exiled::API]`` ``[Exiled::CustomRoles]`` Adding news Spawnpoints, Wrapper for Locker and added LockerType (#77))
 
             Exiled.Events.Handlers.Player.ChangingItem -= playerHandler!.OnChangingItem;
 
