@@ -29,7 +29,7 @@ namespace Exiled.CustomItems.Events
                     }
                     catch (System.Exception e)
                     {
-                        Log.Error($"Error on spawning custom item {customItem?.Name} ({customItem?.Id}) | {e.Message}");
+                        Log.Error($"There was an error while spawning the custom item '{customItem?.Name}' ({customItem?.Id}) | {e.Message}");
                     }
                 }
             });
