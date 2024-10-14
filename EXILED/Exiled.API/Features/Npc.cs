@@ -318,10 +318,7 @@ namespace Exiled.API.Features
         {
             Timing.CallDelayed(time, () =>
             {
-                if (this == null)
-                    return;
-
-                Destroy();
+                this?.Destroy();
             });
         }
     }
