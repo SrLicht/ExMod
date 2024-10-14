@@ -295,12 +295,19 @@ namespace Exiled.API.Features
         /// </summary>
         public void Destroy()
         {
-            Round.IgnoredPlayers.Remove(ReferenceHub);
-            NetworkConnectionToClient conn = ReferenceHub.connectionToClient;
-            ReferenceHub.OnDestroy();
-            CustomNetworkManager.TypedSingleton.OnServerDisconnect(conn);
-            Dictionary.Remove(GameObject);
-            Object.Destroy(GameObject);
+            try
+            {
+                Round.IgnoredPlayers.Remove(ReferenceHub);
+                NetworkConnectionToClient conn = ReferenceHub.connectionToClient;
+                ReferenceHub.OnDestroy();
+                CustomNetworkManager.TypedSingleton.OnServerDisconnect(conn);
+                Dictionary.Remove(GameObject);
+                Object.Destroy(GameObject);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error while destroying a NPC: {e.Message}");
+            }
         }
 
         /// <summary>
