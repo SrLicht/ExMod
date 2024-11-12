@@ -587,7 +587,7 @@ namespace Exiled.Events.Handlers
         public static void OnBanned(BannedEventArgs ev) => Banned.InvokeSafely(ev);
 
         /// <summary>
-        /// Called before banning is revoked from the server.
+        /// Called before a ban is revoked from the server.
         /// </summary>
         /// <param name="ev">The <see cref="UnBanningEventArgs"/> instance.</param>
         public static void OnUnBanning(UnBanningEventArgs ev) => UnBanning.InvokeSafely(ev);
