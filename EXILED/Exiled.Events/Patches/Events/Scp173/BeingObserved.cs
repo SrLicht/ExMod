@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="BeingObserved.cs" company="Exiled Team">
 // Copyright (c) Exiled Team. All rights reserved.
 // Licensed under the CC BY-SA 3.0 license.
@@ -38,7 +38,7 @@ namespace Exiled.Events.Patches.Events.Scp173
             Label continueLabel = generator.DefineLabel();
 
             const int offset = -4;
-            var scp173ExecuteEvent = typeof(EventManager)
+            MethodInfo scp173ExecuteEvent = typeof(EventManager)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .FirstOrDefault(m => m.Name == nameof(EventManager.ExecuteEvent)
                                      && !m.IsGenericMethod);
