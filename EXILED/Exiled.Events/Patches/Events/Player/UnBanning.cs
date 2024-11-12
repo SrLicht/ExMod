@@ -68,7 +68,7 @@ namespace Exiled.Events.Patches.Events.Player
                     // Store the duplicated object in the `ev` local variable.
                     new(OpCodes.Stloc, ev.LocalIndex),
 
-                    // Handlers.Scp173.OnBeingObserved(ev)
+                    // Handlers.Player.OnUnBanning(ev)
                     new(OpCodes.Call, Method(typeof(Handlers.Player), nameof(Handlers.Player.OnUnBanning))),
 
                     // if (!ev.IsAllowed)
