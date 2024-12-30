@@ -5,6 +5,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Exiled.API.Features.Lockers;
+
 namespace Exiled.CustomItems.API.Features
 {
     using System;
@@ -651,8 +653,11 @@ namespace Exiled.CustomItems.API.Features
                 if (pickup == null)
                     continue;
 
-                if (spawnPoint is LockerSpawnPoint)
-                    pickup.IsLocked = true;
+                if (spawnPoint is LockerSpawnPoint { UseChamber: true } lockerSpawnPoint)
+                {
+                    Exiled.API.Features.Lockers.Locker? foundLocker = Exiled.API.Features.Lockers.Locker.Random(lockerSpawnPoint.Zone, lockerSpawnPoint.Type);
+                    foundLocker?.AddItem(pickup);
+                }
 
                 if (pickup.Is(out Exiled.API.Features.Pickups.FirearmPickup firearmPickup) && this is CustomWeapon customWeapon)
                 {
