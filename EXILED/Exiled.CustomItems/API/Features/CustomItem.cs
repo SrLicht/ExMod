@@ -5,8 +5,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Exiled.API.Features.Lockers;
-
 namespace Exiled.CustomItems.API.Features
 {
     using System;
@@ -28,10 +26,7 @@ namespace Exiled.CustomItems.API.Features
     using Exiled.Events.EventArgs.Scp914;
     using Exiled.Loader;
 
-    using InventorySystem.Items.Firearms;
     using InventorySystem.Items.Pickups;
-
-    using MapGeneration.Distributors;
 
     using MEC;
 
